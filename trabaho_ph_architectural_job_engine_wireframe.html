@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRABAHO.PH // Archipelagic & Global Career Index</title>
+    
+    <!-- Distinctive Google Fonts: Fraunces (Editorial Display), Plus Jakarta Sans (Clean Neo-Grotesque), JetBrains Mono (Technical Blueprint Data) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Design System & Blueprint Wireframe Architecture -->
+    <style>
+        :root {
+            /* Palette: Warm Capiz Shell & Manila Paper meets Terracotta, Deep Mangrove Teal & Archipelago Sun */
+            --bg-canvas: #F5F2EB;
+            --bg-surface: #FDFBF7;
+            --bg-surface-alt: #EBE6DA;
+            --ink-primary: #142420;
+            --ink-secondary: #485954;
+            --ink-muted: #768580;
+            
+            --accent-terracotta: #D94E34;
+            --accent-terracotta-hover: #B83B24;
+            --accent-sun: #E69D24;
+            --accent-teal: #1D5B52;
+            --accent-teal-soft: #E1EFEA;
+            
+            --border-wire: #142420;
+            --border-subtle: rgba(20, 36, 32, 0.16);
+            --grid-line: rgba(20, 36, 32, 0.055);
+
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Dark Mode / Blueprint Night Theme Toggle Support */
+        [data-theme="night"] {
+            --bg-canvas: #0E1715;
+            --bg-surface: #15221F;
+            --bg-surface-alt: #1D2E2A;
+            --ink-primary: #F2EFE9;
+            --ink-secondary: #B4C2BE;
+            --ink-muted: #788A85;
+            
+            --accent-terracotta: #F06449;
+            --accent-terracotta-hover: #FF7B61;
+            --accent-sun: #F2B138;
+            --accent-teal: #49B8A5;
+            --accent-teal-soft: rgba(73, 184, 165, 0.15);
+            
+            --border-wire: #425953;
+            --border-subtle: rgba(242, 239, 233, 0.12);
+            --grid-line: rgba(242, 239, 233, 0.045);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+            /* Architectural drafting grid + subtle Capiz radial warmth */
+            background-image: 
+                radial-gradient(circle at 85% 12%, rgba(230, 157, 36, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 12% 75%, rgba(29, 91, 82, 0.08) 0%, transparent 50%),
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+            transition: background-color 0.35s ease, color 0.35s ease;
+            overflow-x: hidden;
+        }
+
+        /* Typography Classes */
+        .font-display { font-family: var(--font-display); }
+        .font-mono-tech { font-family: var(--font-mono); }
+
+        /* Wireframe Structural Borders & Tactile Shadows */
+        .wire-box {
+            background-color: var(--bg-surface);
+            border: 1.5px solid var(--border-wire);
+            box-shadow: 4px 4px 0px var(--border-wire);
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+        }
+
+        .wire-box-interactive:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border-wire);
+        }
+
+        .wire-box-active {
+            border-color: var(--accent-terracotta);
+            box-shadow: 5px 5px 0px var(--accent-terracotta);
+        }
+
+        .wire-pill {
+            border: 1.25px solid var(--border-wire);
+            background-color: var(--bg-surface);
+            transition: all 0.18s ease;
+        }
+
+        .wire-pill:hover, .wire-pill.active {
+            background-color: var(--ink-primary);
+            color: var(--bg-surface);
+        }
+
+        /* Blueprint Corner Registration Marks */
+        .reg-mark {
+            position: relative;
+        }
+        .reg-mark::before {
+            content: '+';
+            position: absolute;
+            top: -10px;
+            left: -6px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-muted);
+            pointer-events: none;
+        }
+
+        /* Orchestrated Page Load Staggered Animations */
+        @keyframes blueprintReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation: blueprintReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+        .stagger-2 { animation: blueprintReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both; }
+        .stagger-3 { animation: blueprintReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both; }
+        .stagger-4 { animation: blueprintReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both; }
+        .stagger-5 { animation: blueprintReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both; }
+
+        /* Wireframe Blueprint Overlay Mode */
+        body.wireframe-xray .wire-box {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 10px,
+                rgba(217, 78, 52, 0.04) 10px,
+                rgba(217, 78, 52, 0.04) 20px
+            );
+        }
+        body.wireframe-xray .xray-tag {
+            display: inline-flex !important;
+        }
+
+        /* Custom Scrollbar for Job Detail Pane */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: var(--bg-surface-alt);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: var(--border-wire);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-[#D94E34] selection:text-white">
+
+    <!-- TOP ARCHITECTURAL SPEC BAR (Wireframe Controls & Live Philippine Market Ticker) -->
+    <div class="border-b border-[var(--border-subtle)] bg-[var(--bg-surface-alt)] px-4 py-2 text-xs font-mono-tech stagger-1">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 font-semibold text-[var(--accent-terracotta)]">
+                    <span class="w-2 h-2 rounded-full bg-[var(--accent-terracotta)] animate-pulse"></span>
+                    SYS.SPEC // PH-GLOBAL-INDEX v4.2
+                </span>
+                <span class="hidden md:inline text-[var(--ink-muted)]">|</span>
+                <span class="hidden md:inline text-[var(--ink-secondary)]">ACTIVE LISTINGS: <strong>48,920</strong> (NCR, CEBU, DAVAO, BACOLOD & GLOBAL REMOTE)</span>
+            </div>
+
+            <!-- Interactive Wireframe Inspection Controls -->
+            <div class="flex items-center gap-2">
+                <button id="toggleXrayBtn" onclick="toggleXrayMode()" class="px-2.5 py-1 rounded-md border border-[var(--border-wire)] bg-[var(--bg-surface)] hover:bg-[var(--ink-primary)] hover:text-[var(--bg-surface)] transition cursor-pointer flex items-center gap-1.5" title="Toggle Architectural Blueprint Annotations">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                    <span>X-RAY ANNOTATIONS: <strong id="xrayState">OFF</strong></span>
+                </button>
+
+                <button id="toggleThemeBtn" onclick="toggleTheme()" class="px-2.5 py-1 rounded-md border border-[var(--border-wire)] bg-[var(--bg-surface)] hover:bg-[var(--ink-primary)] hover:text-[var(--bg-surface)] transition cursor-pointer flex items-center gap-1.5">
+                    <span id="themeIcon">☀</span>
+                    <span id="themeLabel">CAPIZ DAY</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIMARY NAVIGATION HEADER -->
+    <header class="border-b-[1.5px] border-[var(--border-wire)] bg-[var(--bg-surface)]/90 backdrop-blur-md sticky top-0 z-40 stagger-1">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <!-- Brand Identity -->
+            <div class="flex items-center gap-6">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <!-- Custom Geometric Archipelago Sun + Blueprint Emblem -->
+                    <div class="w-9 h-9 rounded-lg bg-[var(--accent-terracotta)] border-[1.5px] border-[var(--border-wire)] flex items-center justify-center text-white font-display font-bold text-lg shadow-[2px_2px_0px_var(--border-wire)] group-hover:rotate-3 transition-transform">
+                        T.
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-xl tracking-tight block leading-none">Trabaho<span class="text-[var(--accent-terracotta)]">.ph</span></span>
+                        <span class="font-mono-tech text-[10px] uppercase tracking-widest text-[var(--ink-muted)] block mt-0.5">Archipelago &amp; Global</span>
+                    </div>
+                </a>
+
+                <!-- Primary Nav Links -->
+                <nav class="hidden lg:flex items-center gap-1 text-sm font-medium">
+                    <a href="#feed" class="px-3 py-1.5 rounded-lg bg-[var(--accent-teal-soft)] text-[var(--accent-teal)] font-semibold">Find Jobs</a>
+                    <a href="#companies" onclick="showToast('Navigating to Philippine & MNC Company Directory Wireframe')" class="px-3 py-1.5 rounded-lg text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] hover:bg-[var(--bg-surface-alt)] transition">Company Reviews</a>
+                    <a href="#salaries" onclick="showToast('Opening PHP / USD Regional Salary Index')" class="px-3 py-1.5 rounded-lg text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] hover:bg-[var(--bg-surface-alt)] transition">Salary Guide (₱/$)</a>
+                    <a href="#agencies" onclick="showToast('Filtering DMW / POEA Accredited Agencies')" class="px-3 py-1.5 rounded-lg text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] hover:bg-[var(--bg-surface-alt)] transition flex items-center gap-1.5">
+                        <span>Verified Agencies</span>
+                        <span class="font-mono-tech text-[10px] px-1.5 py-0.2 rounded bg-[var(--accent-sun)]/20 text-[var(--ink-primary)] border border-[var(--accent-sun)]">DMW</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Right User & Employer Actions -->
+            <div class="flex items-center gap-2.5">
+                <span class="xray-tag hidden font-mono-tech text-[10px] px-2 py-0.5 rounded bg-amber-200 text-black border border-black">[COMP: AUTH_CLUSTER]</span>
+                
+                <button onclick="openEmployerModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-mono-tech uppercase tracking-wider border border-[var(--border-wire)] bg-[var(--bg-surface-alt)] hover:bg-[var(--ink-primary)] hover:text-[var(--bg-surface)] transition cursor-pointer">
+                    <span>Employers / Post Job</span>
+                </button>
+
+                <button onclick="showToast('Candidate Profile Drawer triggered — Upload Resume / Sync LinkedIn')" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[var(--ink-primary)] text-[var(--bg-surface)] hover:bg-[var(--accent-terracotta)] hover:text-white transition cursor-pointer shadow-[2px_2px_0px_var(--accent-terracotta)]">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SEARCH & ARCHIPELAGO COMMAND CENTER -->
+    <section class="pt-8 pb-6 px-4 sm:px-6 border-b border-[var(--border-subtle)] stagger-2">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header + Wireframe Spec Tag -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 font-mono-tech text-xs uppercase tracking-wider text-[var(--accent-teal)] mb-2">
+                        <span>[01 // UNIFIED AGGREGATION ENGINE]</span>
+                        <span class="xray-tag hidden px-1.5 py-0.5 bg-amber-200 text-black rounded text-[10px]">HERO_QUERY_MODULE</span>
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight leading-[1.12] max-w-3xl">
+                        From <span class="italic font-medium text-[var(--accent-terracotta)] underline decoration-2 underline-offset-4">BGC &amp; Cebu IT Park</span> to borderless global teams.
+                    </h1>
+                </div>
+
+                <!-- Currency & Shift Quick Toggle -->
+                <div class="flex items-center gap-2 self-start md:self-end bg-[var(--bg-surface)] p-1.5 rounded-xl border border-[var(--border-wire)]">
+                    <span class="font-mono-tech text-[11px] px-2 text-[var(--ink-muted)]">CURRENCY:</span>
+                    <button id="currPhp" onclick="setCurrency('PHP')" class="px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold bg-[var(--ink-primary)] text-[var(--bg-surface)] cursor-pointer transition">₱ PHP/mo</button>
+                    <button id="currUsd" onclick="setCurrency('USD')" class="px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] cursor-pointer transition">$ USD/yr</button>
+                </div>
+            </div>
+
+            <!-- TACTILE DUAL-INPUT SEARCH BAR (Inspired by Indeed's "What / Where" elevated to an architectural instrument) -->
+            <div class="wire-box rounded-2xl p-2 sm:p-3 mb-5">
+                <form onsubmit="handleSearch(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-2 items-center">
+                    <!-- WHAT INPUT -->
+                    <div class="lg:col-span-5 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-subtle)] focus-within:border-[var(--accent-terracotta)] transition">
+                        <span class="font-mono-tech text-xs font-bold uppercase text-[var(--accent-terracotta)] select-none">WHAT</span>
+                        <input 
+                            id="searchQueryInput"
+                            type="text" 
+                            placeholder="Job title, skill (e.g. React, CPA, Nurse, VA), or MNC..." 
+                            class="w-full bg-transparent text-sm sm:text-base font-medium focus:outline-none placeholder:text-[var(--ink-muted)]"
+                            oninput="filterJobs()"
+                        >
+                        <button type="button" onclick="clearSearchInput('searchQueryInput')" class="text-xs font-mono-tech text-[var(--ink-muted)] hover:text-[var(--ink-primary)]">ESC</button>
+                    </div>
+
+                    <!-- WHERE INPUT -->
+                    <div class="lg:col-span-5 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-subtle)] focus-within:border-[var(--accent-teal)] transition">
+                        <span class="font-mono-tech text-xs font-bold uppercase text-[var(--accent-teal)] select-none">WHERE</span>
+                        <input 
+                            id="searchLocationInput"
+                            type="text" 
+                            placeholder="Makati, BGC, Cebu, Bacolod, Davao, or Remote..." 
+                            class="w-full bg-transparent text-sm sm:text-base font-medium focus:outline-none placeholder:text-[var(--ink-muted)]"
+                            oninput="filterJobs()"
+                        >
+                        <button type="button" onclick="quickLocation('Remote')" class="shrink-0 font-mono-tech text-[11px] px-2 py-0.5 rounded bg-[var(--accent-teal-soft)] text-[var(--accent-teal)] hover:opacity-80 cursor-pointer">
+                            + Remote
+                        </button>
+                    </div>
+
+                    <!-- SUBMIT BUTTON -->
+                    <div class="lg:col-span-2">
+                        <button type="submit" class="w-full py-3.5 px-5 rounded-xl bg-[var(--accent-terracotta)] hover:bg-[var(--accent-terracotta-hover)] text-white font-semibold text-sm sm:text-base border-[1.5px] border-[var(--border-wire)] shadow-[3px_3px_0px_var(--border-wire)] active:translate-y-0.5 transition cursor-pointer flex items-center justify-center gap-2">
+                            <span>Find Jobs</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ARCHIPELAGIC HUB & SOURCE CHIPS (Philippine Regional Hubs + Global Remote + Employer Type) -->
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="font-mono-tech text-[11px] uppercase text-[var(--ink-muted)] mr-1">HUBS &amp; TIERS:</span>
+                
+                <button onclick="toggleHubFilter('ALL')" data-hub="ALL" class="hub-chip wire-pill active px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    All Listings (8)
+                </button>
+                <button onclick="toggleHubFilter('NCR')" data-hub="NCR" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    Metro Manila (BGC / Makati)
+                </button>
+                <button onclick="toggleHubFilter('Visayas')" data-hub="Visayas" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    Visayas (Cebu / Bacolod / Iloilo)
+                </button>
+                <button onclick="toggleHubFilter('Mindanao')" data-hub="Mindanao" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    Mindanao (Davao / CDO)
+                </button>
+                <button onclick="toggleHubFilter('Global Remote')" data-hub="Global Remote" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></span>
+                    Global Remote (USD/AUD/EUR)
+                </button>
+                <button onclick="toggleHubFilter('MNC')" data-hub="MNC" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    Multinational (MNC)
+                </button>
+                <button onclick="toggleHubFilter('Agency')" data-hub="Agency" class="hub-chip wire-pill px-3 py-1.5 rounded-full font-medium cursor-pointer">
+                    Recruitment Agency
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN WORKSPACE: ASYMMETRIC SPLIT-PANE JOB ENGINE -->
+    <main id="feed" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 stagger-3">
+        
+        <!-- Filter & Sorting Telemetry Strip -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-[var(--border-subtle)]">
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="font-mono-tech text-xs text-[var(--ink-secondary)]">
+                    SHOWING <strong id="resultCount" class="text-[var(--ink-primary)]">8</strong> VERIFIED ROLES
+                </span>
+                <span class="text-[var(--ink-muted)]">•</span>
+                
+                <!-- Contextual Work Mode Filters -->
+                <select id="workSetupFilter" onchange="filterJobs()" class="bg-[var(--bg-surface)] border border-[var(--border-wire)] rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer focus:outline-none">
+                    <option value="ALL">Setup: All Modes</option>
+                    <option value="Remote">100% Remote</option>
+                    <option value="Hybrid">Hybrid (2-3x/wk)</option>
+                    <option value="On-site">On-site / Hub</option>
+                </select>
+
+                <select id="shiftFilter" onchange="filterJobs()" class="bg-[var(--bg-surface)] border border-[var(--border-wire)] rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer focus:outline-none">
+                    <option value="ALL">Shift: Any Schedule</option>
+                    <option value="PH Dayshift">PH Dayshift (APAC)</option>
+                    <option value="US/Night Shift">US / Night Shift (+ND)</option>
+                    <option value="Flexible Async">Flexible / Async</option>
+                </select>
+
+                <label class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-wire)] text-xs font-medium cursor-pointer select-none">
+                    <input type="checkbox" id="directHireOnly" onchange="filterJobs()" class="accent-[var(--accent-terracotta)]">
+                    <span>Direct Employer Only</span>
+                </label>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs font-mono-tech">
+                <span class="text-[var(--ink-muted)]">SORT:</span>
+                <select id="sortSelect" onchange="filterJobs()" class="bg-transparent font-semibold text-[var(--ink-primary)] underline cursor-pointer focus:outline-none">
+                    <option value="relevance">Relevance &amp; Match</option>
+                    <option value="salary">Highest Compensation</option>
+                    <option value="recent">Most Recent</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 12-COLUMN SPLIT ARCHITECTURE: LEFT FEED (5 COLS) + RIGHT STICKY DOSSIER (7 COLS) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LEFT COLUMN: AGGREGATED JOB STREAM -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="font-mono-tech text-[11px] uppercase tracking-wider text-[var(--ink-muted)]">[02 // AGGREGATED STREAM]</span>
+                    <span class="xray-tag hidden font-mono-tech text-[10px] px-1.5 py-0.5 bg-amber-200 text-black rounded">LIST_VIEW_CONTAINER</span>
+                </div>
+
+                <!-- Dynamic Job Cards Container -->
+                <div id="jobListContainer" class="space-y-3.5">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="emptyState" class="hidden wire-box rounded-2xl p-8 text-center">
+                    <p class="font-display text-xl font-bold mb-2">No matching roles in this sector</p>
+                    <p class="text-sm text-[var(--ink-secondary)] mb-4">Try clearing your regional hub filter or broadening your keyword search.</p>
+                    <button onclick="resetAllFilters()" class="px-4 py-2 rounded-lg bg-[var(--ink-primary)] text-[var(--bg-surface)] text-xs font-mono-tech uppercase cursor-pointer">
+                        Reset All Wireframe Filters
+                    </button>
+                </div>
+
+                <!-- Wireframe Architecture Note Card -->
+                <div class="p-4 rounded-xl border border-dashed border-[var(--border-wire)] bg-[var(--bg-surface-alt)]/60 text-xs space-y-1.5">
+                    <div class="font-mono-tech font-semibold text-[var(--accent-teal)] flex items-center justify-between">
+                        <span>AGGREGATION SOURCE LEGEND</span>
+                        <span>[API_FEED]</span>
+                    </div>
+                    <p class="text-[var(--ink-secondary)] leading-relaxed">
+                        Listings unify <strong>Direct Local Enterprises</strong>, <strong>PEZA-registered MNC Shared Services</strong>, <strong>DMW-licensed Agencies</strong>, and <strong>Global Remote Employers</strong> with standardized PHP/USD compensation benchmarks and statutory benefit flags (13th Month, HMO Day 1, Night Diff).
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: STICKY JOB DOSSIER & APPLICATION BLUEPRINT -->
+            <div class="lg:col-span-7 lg:sticky lg:top-20">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono-tech text-[11px] uppercase tracking-wider text-[var(--ink-muted)]">[03 // ROLE SPECIFICATION DOSSIER]</span>
+                    <span class="xray-tag hidden font-mono-tech text-[10px] px-1.5 py-0.5 bg-amber-200 text-black rounded">STICKY_DETAIL_PANE</span>
+                </div>
+
+                <!-- Detail Container -->
+                <div id="jobDetailPane" class="wire-box rounded-2xl overflow-hidden">
+                    <!-- Populated dynamically when a job card is selected -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- WIREFRAME FOOTER: ARCHIPELAGIC MARKET INTELLIGENCE & SITEMAP -->
+    <footer class="mt-16 border-t-[1.5px] border-[var(--border-wire)] bg-[var(--bg-surface)] py-10 px-4 sm:px-6 stagger-5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+            <div class="md:col-span-1 space-y-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded bg-[var(--accent-terracotta)] border border-[var(--border-wire)] flex items-center justify-center text-white font-display font-bold">T.</div>
+                    <span class="font-display font-bold text-lg">Trabaho.ph</span>
+                </div>
+                <p class="text-xs text-[var(--ink-secondary)] leading-relaxed">
+                    Architectural wireframe for a high-trust Philippine &amp; Global employment search engine. Built for transparent compensation, verified entities, and borderless talent mobility.
+                </p>
+                <div class="font-mono-tech text-[11px] text-[var(--ink-muted)]">
+                    GRID: 12-COL // BREAKPOINTS: SM/MD/LG/XL
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider mb-3 text-[var(--accent-terracotta)]">Philippine Regional Hubs</h4>
+                <ul class="space-y-2 text-xs text-[var(--ink-secondary)]">
+                    <li><a href="#feed" onclick="toggleHubFilter('NCR')" class="hover:underline">Bonifacio Global City &amp; Makati CBD</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('Visayas')" class="hover:underline">Cebu IT Park &amp; Business Park</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('Visayas')" class="hover:underline">Bacolod &amp; Iloilo BPO/Tech Corridors</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('Mindanao')" class="hover:underline">Davao &amp; Cagayan de Oro Hubs</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider mb-3 text-[var(--accent-teal)]">Global &amp; Remote Tracks</h4>
+                <ul class="space-y-2 text-xs text-[var(--ink-secondary)]">
+                    <li><a href="#feed" onclick="toggleHubFilter('Global Remote')" class="hover:underline">US / Canada Direct Remote (USD)</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('Global Remote')" class="hover:underline">ANZ / Singapore Overlap Roles</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('MNC')" class="hover:underline">MNC Global In-House Centers (GIC)</a></li>
+                    <li><a href="#feed" onclick="toggleHubFilter('Agency')" class="hover:underline">DMW-Accredited Overseas Agencies</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider mb-3">Wireframe Prototype Specs</h4>
+                <div class="p-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-subtle)] font-mono-tech text-[11px] space-y-1 text-[var(--ink-secondary)]">
+                    <div>DISPLAY: Fraunces Variable</div>
+                    <div>BODY: Plus Jakarta Sans</div>
+                    <div>DATA: JetBrains Mono</div>
+                    <div>THEME: Capiz Light / Blueprint Night</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QUICK APPLY / EMPLOYER POST MODAL (Custom UI - Zero native alert/confirm) -->
+    <div id="customModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+        <div class="wire-box rounded-2xl max-w-lg w-full p-6 relative animate-[blueprintReveal_0.25s_ease-out]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg border border-[var(--border-wire)] flex items-center justify-center font-mono-tech text-sm hover:bg-[var(--ink-primary)] hover:text-[var(--bg-surface)] cursor-pointer">
+                ✕
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- NON-INTRUSIVE TOAST NOTIFICATION -->
+    <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 px-4 py-3 rounded-xl bg-[var(--ink-primary)] text-[var(--bg-surface)] border border-[var(--accent-terracotta)] shadow-lg font-mono-tech text-xs">
+        <span class="w-2 h-2 rounded-full bg-[var(--accent-sun)]"></span>
+        <span id="toastMessage">Action triggered</span>
+    </div>
+
+    <!-- JAVASCRIPT: DATASET, STATE MANAGEMENT & INTERACTIVE WIREFRAME LOGIC -->
+    <script>
+        // Structured, culturally accurate Philippine + Global Remote job aggregation dataset
+        const JOB_LISTINGS = [
+            {
+                id: "TRB-8841",
+                title: "Senior Full-Stack Product Engineer (React / Node)",
+                company: "Maya Philippines, Inc.",
+                entityType: "Local Enterprise",
+                badgeCode: "LOCAL UNICORN",
+                hub: "NCR",
+                location: "BGC, Taguig City",
+                workSetup: "Hybrid",
+                shift: "PH Dayshift",
+                phpMin: 165000,
+                phpMax: 220000,
+                usdMin: 35000,
+                usdMax: 47000,
+                posted: "2h ago",
+                applicants: 34,
+                responseRate: "94% replies in 48h",
+                isDirect: true,
+                perks: ["HMO + 2 Dependents Day 1", "13th & 14th Month Pay", "₱3,500 Monthly WFH Allowance", "Stock Options"],
+                summary: "Architect high-throughput digital banking and merchant payment interfaces serving over 50 million Filipinos across the archipelago.",
+                responsibilities: [
+                    "Lead frontend architecture for real-time QRPh and cross-border remittance flows.",
+                    "Collaborate with BGC product squads and BSP compliance engineers to ensure zero-downtime releases.",
+                    "Mentor mid-level engineers across Manila and regional remote hubs."
+                ],
+                requirements: [
+                    "5+ years building production TypeScript, React, and distributed Node.js microservices.",
+                    "Experience with high-concurrency financial ledgers or payment gateways.",
+                    "Amenable to 2x/week collaborative sprint days in Bonifacio Global City."
+                ]
+            },
+            {
+                id: "TRB-8842",
+                title: "Staff Frontend Systems Architect (Remote APAC/US)",
+                company: "Linearity Cloud Systems (San Francisco)",
+                entityType: "Global Remote",
+                badgeCode: "GLOBAL DIRECT • USD",
+                hub: "Global Remote",
+                location: "100% Remote (Philippines)",
+                workSetup: "Remote",
+                shift: "Flexible Async",
+                phpMin: 310000,
+                phpMax: 420000,
+                usdMin: 66000,
+                usdMax: 90000,
+                posted: "4h ago",
+                applicants: 61,
+                responseRate: "Direct Founder Review",
+                isDirect: true,
+                perks: ["Paid in USD via Deel/Wise", "25 Days Paid Time Off", "$2,000 Home Office Stipend", "Annual Team Retreat"],
+                summary: "Join a globally distributed infrastructure team hiring senior engineering talent directly in the Philippines with 3-hour US Pacific overlap.",
+                responsibilities: [
+                    "Design and maintain our multi-region observability dashboard and design token pipeline.",
+                    "Optimize WebGL and canvas rendering performance for telemetry graphs.",
+                    "Write clear RFCs for asynchronous collaboration across Manila, Tokyo, and SF."
+                ],
+                requirements: [
+                    "Deep mastery of modern browser APIs, CSS architecture, and state machines.",
+                    "Proven track record working independently in remote-first engineering organizations.",
+                    "Reliable fiber internet + backup power setup anywhere in the Philippines."
+                ]
+            },
+            {
+                id: "TRB-8843",
+                title: "Cloud Infrastructure & FinOps Lead",
+                company: "Accenture in the Philippines (GIC)",
+                entityType: "MNC",
+                badgeCode: "MNC • PEZA HUB",
+                hub: "Visayas",
+                location: "Cebu IT Park, Cebu City",
+                workSetup: "Hybrid",
+                shift: "PH Dayshift",
+                phpMin: 140000,
+                phpMax: 185000,
+                usdMin: 30000,
+                usdMax: 39500,
+                posted: "6h ago",
+                applicants: 29,
+                responseRate: "89% replies in 3d",
+                isDirect: true,
+                perks: ["HMO Day 1 + Life Insurance", "13th Month + Performance Bonus", "AWS/Azure Certification Sponsorship", "Shuttle & Meal Allowance"],
+                summary: "Lead enterprise cloud migration and AWS cost-governance squads supporting Fortune 500 APAC clients from our Cebu IT Park delivery center.",
+                responsibilities: [
+                    "Architect Terraform and Kubernetes multi-cluster deployments for regional banking clients.",
+                    "Establish automated FinOps tagging and reserved-instance forecasting.",
+                    "Coordinate cross-hub engineering deliveries between Cebu, Iloilo, and Manila."
+                ],
+                requirements: [
+                    "AWS Solutions Architect Professional or Azure DevOps Expert certification.",
+                    "4+ years leading cloud infrastructure teams in an enterprise or shared-services setup.",
+                    "Strong stakeholder communication skills."
+                ]
+            },
+            {
+                id: "TRB-8844",
+                title: "Senior US Tax & Audit Accountant (CPA)",
+                company: "KPMG Global Delivery Center",
+                entityType: "MNC",
+                badgeCode: "MNC • SHARED SERVICES",
+                hub: "NCR",
+                location: "Ayala Ave, Makati City",
+                workSetup: "Hybrid",
+                shift: "US/Night Shift",
+                phpMin: 95000,
+                phpMax: 135000,
+                usdMin: 20500,
+                usdMax: 29000,
+                posted: "9h ago",
+                applicants: 19,
+                responseRate: "91% replies in 48h",
+                isDirect: true,
+                perks: ["20% Night Differential", "13th & 14th Month Pay", "HMO + Optical/Dental", "CPA License Renewal Support"],
+                summary: "Execute complex federal and multi-state corporate tax engagements for North American technology and healthcare portfolios.",
+                responsibilities: [
+                    "Prepare and review US Form 1120, 1065, and cross-border tax provision workpapers.",
+                    "Supervise junior tax associates during peak filing cycles.",
+                    "Liaise directly with New York and Chicago engagement managers."
+                ],
+                requirements: [
+                    "Philippine CPA license required; US EA or CPA is a strong advantage.",
+                    "Minimum 3 years of external audit or international tax experience.",
+                    "Comfortable with hybrid mid/night shift alignment."
+                ]
+            },
+            {
+                id: "TRB-8845",
+                title: "Registered ICU & Telemetry Nurses (Germany / UK)",
+                company: "Staffhouse International Resources",
+                entityType: "Agency",
+                badgeCode: "DMW LICENSED AGENCY",
+                hub: "NCR",
+                location: "Ermita, Manila (Deployment: Munich)",
+                workSetup: "On-site",
+                shift: "PH Dayshift",
+                phpMin: 195000,
+                phpMax: 245000,
+                usdMin: 41500,
+                usdMax: 52000,
+                posted: "12h ago",
+                applicants: 82,
+                responseRate: "Zero Placement Fee",
+                isDirect: false,
+                perks: ["100% Zero Placement Fee (DMW Verified)", "Free B1/B2 German Language Training", "Relocation & Visa Airfare Covered", "EU Pension & Healthcare"],
+                summary: "Direct hospital placement for Philippine Registered Nurses seeking long-term clinical careers in Bavarian university hospitals.",
+                responsibilities: [
+                    "Deliver acute post-operative and intensive care nursing in state-of-the-art clinical wards.",
+                    "Complete employer-sponsored language immersion in Manila prior to deployment.",
+                    "Collaborate with multidisciplinary European medical teams."
+                ],
+                requirements: [
+                    "Valid PRC Nursing License with at least 18 months bedside hospital experience.",
+                    "No placement fee — strictly compliant with Department of Migrant Workers (DMW) regulations.",
+                    "Willingness to undergo 6-month sponsored language academy."
+                ]
+            },
+            {
+                id: "TRB-8846",
+                title: "Operations & Customer Experience Team Lead",
+                company: "Panasiatic Solutions / Visayas BPO Hub",
+                entityType: "Local Enterprise",
+                badgeCode: "REGIONAL HUB • BACOLOD",
+                hub: "Visayas",
+                location: "Bacolod City, Negros Occidental",
+                workSetup: "On-site",
+                shift: "US/Night Shift",
+                phpMin: 48000,
+                phpMax: 65000,
+                usdMin: 10200,
+                usdMax: 13800,
+                posted: "1d ago",
+                applicants: 41,
+                responseRate: "Walk-in & Virtual Fast-Track",
+                isDirect: true,
+                perks: ["15% Night Differential + Rice Subsidy", "HMO + Free Dependent", "13th Month Pay", "Performance KPI Incentives"],
+                summary: "Lead a 18-person omnichannel fintech support pod in Bacolod City, driving CSAT and first-contact resolution metrics.",
+                responsibilities: [
+                    "Coach frontline specialists on escalation handling, empathy, and compliance.",
+                    "Analyze daily SLA dashboards and report weekly workforce trends to US client directors.",
+                    "Foster low-attrition team culture in our Negros Occidental campus."
+                ],
+                requirements: [
+                    "At least 2 years as a BPO Team Leader handling voice/chat fintech or telco accounts.",
+                    "Strong analytical command of Excel/Google Sheets and QA calibration.",
+                    "Based in or willing to relocate to Bacolod City."
+                ]
+            },
+            {
+                id: "TRB-8847",
+                title: "Executive Virtual Assistant & RevOps Coordinator",
+                company: "Athena Executive Partners",
+                entityType: "Agency",
+                badgeCode: "REMOTE TALENT PARTNER",
+                hub: "Global Remote",
+                location: "Remote (Bacolod / Iloilo / Cebu / NCR)",
+                workSetup: "Remote",
+                shift: "US/Night Shift",
+                phpMin: 55000,
+                phpMax: 78000,
+                usdMin: 11800,
+                usdMax: 16600,
+                posted: "1d ago",
+                applicants: 115,
+                responseRate: "48h Assessment",
+                isDirect: false,
+                perks: ["MacBook Air Provided", "HMO + Mental Wellness Stipend", "13th Month Pay", "AI Workflow Certification"],
+                summary: "Partner 1:1 with Silicon Valley founders and venture partners to manage inbox triage, HubSpot pipelines, and executive travel.",
+                responsibilities: [
+                    "Build automated Notion, Zapier, and CRM workflows to reclaim 15+ hours/week for your client.",
+                    "Coordinate board decks, investor updates, and international travel itineraries.",
+                    "Operate as a trusted strategic right hand during US business hours."
+                ],
+                requirements: [
+                    "Exceptional written English and proactive problem-solving instincts.",
+                    "2+ years in executive support, project coordination, or startup operations.",
+                    "Quiet home workspace with minimum 50 Mbps fiber connectivity."
+                ]
+            },
+            {
+                id: "TRB-8848",
+                title: "Agri-Supply Chain & Cold Logistics Manager",
+                company: "Dole Philippines / Mindanao Operations",
+                entityType: "MNC",
+                badgeCode: "MNC • AGRO-EXPORT",
+                hub: "Mindanao",
+                location: "Davao City & Polomolok",
+                workSetup: "On-site",
+                shift: "PH Dayshift",
+                phpMin: 85000,
+                phpMax: 120000,
+                usdMin: 18200,
+                usdMax: 25600,
+                posted: "2d ago",
+                applicants: 16,
+                responseRate: "85% replies in 5d",
+                isDirect: true,
+                perks: ["Company Vehicle / Fleet Plan", "13th & 14th Month Pay", "Family HMO Coverage", "Housing & Relocation Support"],
+                summary: "Oversee refrigerated port logistics, vessel scheduling, and cold-chain telemetry for Mindanao agricultural exports to Japan and Korea.",
+                responsibilities: [
+                    "Manage end-to-end reefer container dispatch from Mindanao packhouses to Sasa Wharf.",
+                    "Reduce port dwell time and temperature excursion incidents using IoT trackers.",
+                    "Negotiate freight contracts with regional shipping lines and customs brokers."
+                ],
+                requirements: [
+                    "Degree in Industrial Engineering, Supply Chain Management, or Agribusiness.",
+                    "4+ years in cold-chain logistics, port operations, or FMCG distribution.",
+                    "Willing to travel across Davao and South Cotabato facilities."
+                ]
+            }
+        ];
+
+        // Application State
+        let state = {
+            selectedJobId: JOB_LISTINGS[0].id,
+            activeHub: 'ALL',
+            currency: 'PHP',
+            xrayMode: false,
+            theme: 'day',
+            savedJobIds: new Set(['TRB-8842'])
+        };
+
+        // Format salary according to active currency toggle
+        function formatSalary(job) {
+            if (state.currency === 'PHP') {
+                return `₱${(job.phpMin / 1000).toFixed(0)}k – ₱${(job.phpMax / 1000).toFixed(0)}k / mo`;
+            } else {
+                return `$${(job.usdMin / 1000).toFixed(1)}k – $${(job.usdMax / 1000).toFixed(1)}k / yr`;
+            }
+        }
+
+        // Badge styling helper based on entity type
+        function getEntityBadgeStyle(entityType) {
+            switch (entityType) {
+                case 'Global Remote':
+                    return 'bg-[var(--accent-teal-soft)] text-[var(--accent-teal)] border-[var(--accent-teal)]';
+                case 'MNC':
+                    return 'bg-[var(--accent-sun)]/20 text-[var(--ink-primary)] border-[var(--accent-sun)]';
+                case 'Agency':
+                    return 'bg-purple-500/10 text-purple-800 dark:text-purple-300 border-purple-500/40';
+                default:
+                    return 'bg-[var(--accent-terracotta)]/12 text-[var(--accent-terracotta)] border-[var(--accent-terracotta)]';
+            }
+        }
+
+        // Filter & Sort Engine
+        function getFilteredJobs() {
+            const query = document.getElementById('searchQueryInput').value.trim().toLowerCase();
+            const loc = document.getElementById('searchLocationInput').value.trim().toLowerCase();
+            const setup = document.getElementById('workSetupFilter').value;
+            const shift = document.getElementById('shiftFilter').value;
+            const directOnly = document.getElementById('directHireOnly').checked;
+            const sortBy = document.getElementById('sortSelect').value;
+
+            let filtered = JOB_LISTINGS.filter(job => {
+                // Hub/Entity chip filter
+                if (state.activeHub !== 'ALL') {
+                    const matchesHub = job.hub === state.activeHub || job.entityType === state.activeHub;
+                    if (!matchesHub) return false;
+                }
+
+                // Keyword query
+                if (query) {
+                    const haystack = `${job.title} ${job.company} ${job.summary} ${job.perks.join(' ')}`.toLowerCase();
+                    if (!haystack.includes(query)) return false;
+                }
+
+                // Location query
+                if (loc) {
+                    const locHaystack = `${job.location} ${job.hub} ${job.workSetup}`.toLowerCase();
+                    if (!locHaystack.includes(loc)) return false;
+                }
+
+                // Work setup
+                if (setup !== 'ALL' && job.workSetup !== setup) return false;
+
+                // Shift filter
+                if (shift !== 'ALL' && job.shift !== shift) return false;
+
+                // Direct hire only
+                if (directOnly && !job.isDirect) return false;
+
+                return true;
+            });
+
+            // Sorting
+            if (sortBy === 'salary') {
+                filtered.sort((a, b) => b.phpMax - a.phpMax);
+            } else if (sortBy === 'recent') {
+                filtered.sort((a, b) => a.id.localeCompare(b.id));
+            }
+
+            return filtered;
+        }
+
+        // Render Left Feed Cards
+        function renderJobList() {
+            const container = document.getElementById('jobListContainer');
+            const emptyState = document.getElementById('emptyState');
+            const filtered = getFilteredJobs();
+
+            document.getElementById('resultCount').textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            // Ensure selectedJobId exists in filtered results; otherwise select first
+            if (!filtered.some(j => j.id === state.selectedJobId)) {
+                state.selectedJobId = filtered[0].id;
+            }
+
+            container.innerHTML = filtered.map(job => {
+                const isSelected = job.id === state.selectedJobId;
+                const isSaved = state.savedJobIds.has(job.id);
+
+                return `
+                    <article 
+                        onclick="selectJob('${job.id}')"
+                        class="wire-box wire-box-interactive rounded-xl p-4 cursor-pointer relative ${isSelected ? 'wire-box-active' : ''}"
+                    >
+                        <!-- Top Meta Row -->
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="font-mono-tech text-[10px] font-semibold px-2 py-0.5 rounded border ${getEntityBadgeStyle(job.entityType)}">
+                                ${job.badgeCode}
+                            </span>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono-tech text-[11px] text-[var(--ink-muted)]">${job.posted}</span>
+                                <button 
+                                    onclick="toggleSaveJob(event, '${job.id}')" 
+                                    class="p-1 rounded hover:bg-[var(--bg-surface-alt)] transition"
+                                    title="${isSaved ? 'Saved to Shortlist' : 'Bookmark Role'}"
+                                >
+                                    <svg class="w-4 h-4 ${isSaved ? 'fill-[var(--accent-terracotta)] text-[var(--accent-terracotta)]' : 'text-[var(--ink-muted)]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Job Title & Company -->
+                        <h3 class="font-display font-bold text-lg leading-snug mb-1 group-hover:text-[var(--accent-terracotta)]">
+                            ${job.title}
+                        </h3>
+                        <div class="text-xs font-semibold text-[var(--ink-secondary)] mb-3 flex flex-wrap items-center gap-1.5">
+                            <span>${job.company}</span>
+                            <span class="text-[var(--ink-muted)]">•</span>
+                            <span class="text-[var(--ink-muted)] font-normal">${job.location}</span>
+                        </div>
+
+                        <!-- Compensation & Schedule Pills -->
+                        <div class="flex flex-wrap items-center gap-1.5 mb-3">
+                            <span class="font-mono-tech text-xs font-bold px-2.5 py-1 rounded-md bg-[var(--bg-surface-alt)] border border-[var(--border-subtle)] text-[var(--ink-primary)]">
+                                ${formatSalary(job)}
+                            </span>
+                            <span class="font-mono-tech text-[11px] px-2 py-1 rounded-md bg-[var(--bg-canvas)] border border-[var(--border-subtle)] text-[var(--ink-secondary)]">
+                                ${job.workSetup}
+                            </span>
+                            <span class="font-mono-tech text-[11px] px-2 py-1 rounded-md bg-[var(--bg-canvas)] border border-[var(--border-subtle)] text-[var(--ink-secondary)]">
+                                ${job.shift}
+                            </span>
+                        </div>
+
+                        <!-- Snippet & Response Telemetry -->
+                        <p class="text-xs text-[var(--ink-secondary)] line-clamp-2 mb-3 leading-relaxed">
+                            ${job.summary}
+                        </p>
+
+                        <div class="pt-2.5 border-t border-[var(--border-subtle)] flex items-center justify-between font-mono-tech text-[11px]">
+                            <span class="text-[var(--accent-teal)] font-medium">✓ ${job.responseRate}</span>
+                            <span class="text-[var(--ink-muted)]">${job.id} →</span>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            renderJobDetail();
+        }
+
+        // Render Right Sticky Dossier
+        function renderJobDetail() {
+            const pane = document.getElementById('jobDetailPane');
+            const job = JOB_LISTINGS.find(j => j.id === state.selectedJobId) || JOB_LISTINGS[0];
+            const isSaved = state.savedJobIds.has(job.id);
+
+            pane.innerHTML = `
+                <!-- Dossier Header Blueprint -->
+                <div class="p-6 sm:p-7 border-b-[1.5px] border-[var(--border-wire)] bg-[var(--bg-surface-alt)]/50">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono-tech text-xs font-bold px-2.5 py-0.5 rounded border ${getEntityBadgeStyle(job.entityType)}">
+                                ${job.badgeCode}
+                            </span>
+                            <span class="font-mono-tech text-xs text-[var(--ink-muted)]">ID: ${job.id}</span>
+                        </div>
+                        <span class="font-mono-tech text-xs text-[var(--ink-secondary)]">
+                            ${job.applicants} candidates in pipeline
+                        </span>
+                    </div>
+
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold leading-tight mb-2">
+                        ${job.title}
+                    </h2>
+
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[var(--ink-secondary)] mb-5">
+                        <span class="font-bold text-[var(--ink-primary)] underline decoration-[var(--accent-terracotta)] underline-offset-4">${job.company}</span>
+                        <span>•</span>
+                        <span>${job.location}</span>
+                        <span>•</span>
+                        <span class="font-mono-tech text-xs px-2 py-0.5 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">${job.entityType}</span>
+                    </div>
+
+                    <!-- Primary Action Bar -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="openApplyModal('${job.id}')" class="px-6 py-3 rounded-xl bg-[var(--accent-terracotta)] hover:bg-[var(--accent-terracotta-hover)] text-white font-semibold text-sm border-[1.5px] border-[var(--border-wire)] shadow-[3px_3px_0px_var(--border-wire)] active:translate-y-0.5 transition cursor-pointer flex items-center gap-2">
+                            <span>Quick Apply with Profile</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                        </button>
+
+                        <button onclick="toggleSaveJob(event, '${job.id}')" class="px-4 py-3 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-alt)] text-[var(--ink-primary)] font-semibold text-sm border-[1.5px] border-[var(--border-wire)] transition cursor-pointer">
+                            ${isSaved ? '★ Saved in Shortlist' : '☆ Save Role'}
+                        </button>
+
+                        <button onclick="copyShareLink('${job.id}')" class="p-3 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-alt)] border-[1.5px] border-[var(--border-wire)] transition cursor-pointer" title="Copy Shareable Role Link">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compensation & Philippine Statutory Matrix -->
+                <div class="p-6 sm:p-7 space-y-6 max-h-[68vh] overflow-y-auto custom-scroll">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="p-3.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                            <div class="font-mono-tech text-[10px] uppercase text-[var(--ink-muted)] mb-1">VERIFIED PAY BAND</div>
+                            <div class="font-mono-tech text-base font-bold text-[var(--accent-terracotta)]">${formatSalary(job)}</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                            <div class="font-mono-tech text-[10px] uppercase text-[var(--ink-muted)] mb-1">WORK CADENCE</div>
+                            <div class="font-semibold text-sm">${job.workSetup} • ${job.shift}</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                            <div class="font-mono-tech text-[10px] uppercase text-[var(--ink-muted)] mb-1">HIRING VELOCITY</div>
+                            <div class="font-semibold text-sm text-[var(--accent-teal)]">${job.responseRate}</div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits & Statutory Package -->
+                    <div>
+                        <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] mb-2.5">
+                            COMPENSATION &amp; STATUTORY PACKAGE
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${job.perks.map(perk => `
+                                <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-[var(--accent-teal-soft)] text-[var(--accent-teal)] border border-[var(--accent-teal)]/30">
+                                    ✓ ${perk}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Role Overview -->
+                    <div>
+                        <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] mb-2">
+                            MISSION &amp; CONTEXT
+                        </h4>
+                        <p class="text-sm text-[var(--ink-secondary)] leading-relaxed">
+                            ${job.summary}
+                        </p>
+                    </div>
+
+                    <!-- Key Deliverables -->
+                    <div>
+                        <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] mb-2.5">
+                            KEY DELIVERABLES
+                        </h4>
+                        <ul class="space-y-2 text-sm text-[var(--ink-secondary)]">
+                            ${job.responsibilities.map(item => `
+                                <li class="flex items-start gap-2.5">
+                                    <span class="font-mono-tech text-xs font-bold text-[var(--accent-terracotta)] mt-0.5">01/</span>
+                                    <span>${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Qualifications -->
+                    <div>
+                        <h4 class="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] mb-2.5">
+                            CANDIDATE SPECIFICATION
+                        </h4>
+                        <ul class="space-y-2 text-sm text-[var(--ink-secondary)]">
+                            ${job.requirements.map(req => `
+                                <li class="flex items-start gap-2.5">
+                                    <span class="font-mono-tech text-xs font-bold text-[var(--accent-teal)] mt-0.5">▪</span>
+                                    <span>${req}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Wireframe Integrity Footer inside Dossier -->
+                    <div class="p-4 rounded-xl bg-[var(--bg-surface-alt)] border border-[var(--border-subtle)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <div>
+                            <strong class="block font-semibold">Verified Entity &amp; Anti-Ghosting Guarantee</strong>
+                            <span class="text-[var(--ink-secondary)]">SEC / DTI / DMW registration cross-checked by Trabaho.ph Trust Engine.</span>
+                        </div>
+                        <button onclick="showToast('Entity verification certificate viewed for ${job.company}')" class="shrink-0 font-mono-tech text-[11px] underline text-[var(--accent-terracotta)] cursor-pointer">
+                            Inspect Credentials →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Interactive Actions
+        function selectJob(jobId) {
+            state.selectedJobId = jobId;
+            renderJobList();
+            // On mobile, smoothly scroll to detail pane
+            if (window.innerWidth < 1024) {
+                document.getElementById('jobDetailPane').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function toggleHubFilter(hub) {
+            state.activeHub = hub;
+            document.querySelectorAll('.hub-chip').forEach(btn => {
+                if (btn.dataset.hub === hub) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            filterJobs();
+        }
+
+        function quickLocation(locText) {
+            const input = document.getElementById('searchLocationInput');
+            input.value = input.value === locText ? '' : locText;
+            filterJobs();
+        }
+
+        function clearSearchInput(inputId) {
+            document.getElementById(inputId).value = '';
+            filterJobs();
+        }
+
+        function resetAllFilters() {
+            document.getElementById('searchQueryInput').value = '';
+            document.getElementById('searchLocationInput').value = '';
+            document.getElementById('workSetupFilter').value = 'ALL';
+            document.getElementById('shiftFilter').value = 'ALL';
+            document.getElementById('directHireOnly').checked = false;
+            toggleHubFilter('ALL');
+        }
+
+        function filterJobs() {
+            renderJobList();
+        }
+
+        function handleSearch(e) {
+            e.preventDefault();
+            filterJobs();
+            showToast('Updated aggregated search results');
+        }
+
+        function setCurrency(curr) {
+            state.currency = curr;
+            const phpBtn = document.getElementById('currPhp');
+            const usdBtn = document.getElementById('currUsd');
+            if (curr === 'PHP') {
+                phpBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold bg-[var(--ink-primary)] text-[var(--bg-surface)] cursor-pointer transition';
+                usdBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] cursor-pointer transition';
+            } else {
+                usdBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold bg-[var(--ink-primary)] text-[var(--bg-surface)] cursor-pointer transition';
+                phpBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-mono-tech font-semibold text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] cursor-pointer transition';
+            }
+            renderJobList();
+        }
+
+        function toggleSaveJob(e, jobId) {
+            e.stopPropagation();
+            if (state.savedJobIds.has(jobId)) {
+                state.savedJobIds.delete(jobId);
+                showToast(`Removed ${jobId} from shortlist`);
+            } else {
+                state.savedJobIds.add(jobId);
+                showToast(`Saved ${jobId} to your career shortlist`);
+            }
+            renderJobList();
+        }
+
+        function copyShareLink(jobId) {
+            const dummyUrl = `https://trabaho.ph/role/${jobId}`;
+            const tempInput = document.createElement('input');
+            tempInput.value = dummyUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(`Copied link: ${dummyUrl}`);
+        }
+
+        // Wireframe X-Ray Blueprint Toggle
+        function toggleXrayMode() {
+            state.xrayMode = !state.xrayMode;
+            document.body.classList.toggle('wireframe-xray', state.xrayMode);
+            document.getElementById('xrayState').textContent = state.xrayMode ? 'ON' : 'OFF';
+            showToast(state.xrayMode ? 'Blueprint X-Ray component annotations enabled' : 'Blueprint X-Ray annotations hidden');
+        }
+
+        // Capiz Day / Blueprint Night Theme Toggle
+        function toggleTheme() {
+            state.theme = state.theme === 'day' ? 'night' : 'day';
+            if (state.theme === 'night') {
+                document.documentElement.setAttribute('data-theme', 'night');
+                document.getElementById('themeIcon').textContent = '☾';
+                document.getElementById('themeLabel').textContent = 'BLUEPRINT NIGHT';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('themeIcon').textContent = '☀';
+                document.getElementById('themeLabel').textContent = 'CAPIZ DAY';
+            }
+        }
+
+        // Modal Handlers
+        function openApplyModal(jobId) {
+            const job = JOB_LISTINGS.find(j => j.id === jobId);
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="font-mono-tech text-xs text-[var(--accent-terracotta)] mb-1">[ONE-CLICK CANDIDATE DISPATCH]</div>
+                <h3 class="font-display text-2xl font-bold mb-1">Apply to ${job.company}</h3>
+                <p class="text-xs text-[var(--ink-secondary)] mb-4">${job.title} • ${job.location}</p>
+                
+                <form onsubmit="submitApplication(event, '${job.company}')" class="space-y-3 text-sm">
+                    <div>
+                        <label class="block font-mono-tech text-[11px] uppercase mb-1">Full Name</label>
+                        <input type="text" required value="Camille Reyes-Santos" class="w-full px-3 py-2 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block font-mono-tech text-[11px] uppercase mb-1">Current Hub / City</label>
+                            <input type="text" required value="Bacolod City / Remote" class="w-full px-3 py-2 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                        </div>
+                        <div>
+                            <label class="block font-mono-tech text-[11px] uppercase mb-1">Expected Rate (${state.currency})</label>
+                            <input type="text" required value="${formatSalary(job)}" class="w-full px-3 py-2 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-wire)]">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-mono-tech text-[11px] uppercase mb-1">Attached Dossier</label>
+                        <div class="p-2.5 rounded-lg bg-[var(--accent-teal-soft)] border border-[var(--accent-teal)] text-xs font-mono-tech text-[var(--accent-teal)] flex justify-between items-center">
+                            <span>✓ Reyes-Santos_CV_2026.pdf</span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[var(--accent-terracotta)] text-white font-semibold border-[1.5px] border-[var(--border-wire)] shadow-[3px_3px_0px_var(--border-wire)] cursor-pointer mt-2">
+                        Transmit Application Packet →
+                    </button>
+                </form>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openEmployerModal() {
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="font-mono-tech text-xs text-[var(--accent-teal)] mb-1">[EMPLOYER &amp; AGENCY INGESTION PORTAL]</div>
+                <h3 class="font-display text-2xl font-bold mb-2">Post a Role or Sync ATS</h3>
+                <p class="text-xs text-[var(--ink-secondary)] mb-4 leading-relaxed">
+                    Connect Workday, Greenhouse, or post directly to reach verified candidates across Metro Manila, Visayas, Mindanao, and global remote hubs.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-xs">
+                    <div class="p-3 rounded-xl border border-[var(--border-wire)] bg-[var(--bg-canvas)]">
+                        <strong class="block font-display text-sm mb-1">Direct PH / MNC</strong>
+                        <span class="text-[var(--ink-secondary)]">Requires SEC/DTI or PEZA registration ID for instant trust badge.</span>
+                    </div>
+                    <div class="p-3 rounded-xl border border-[var(--border-wire)] bg-[var(--bg-canvas)]">
+                        <strong class="block font-display text-sm mb-1">Recruitment Agency</strong>
+                        <span class="text-[var(--ink-secondary)]">Requires active DOLE PEA or DMW license verification.</span>
+                    </div>
+                </div>
+                <button onclick="closeModal(); showToast('Employer Sandbox Onboarding initialized')" class="w-full py-3 rounded-xl bg-[var(--ink-primary)] text-[var(--bg-surface)] font-semibold text-sm cursor-pointer">
+                    Launch Employer Dashboard Wireframe
+                </button>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function submitApplication(e, companyName) {
+            e.preventDefault();
+            closeModal();
+            showToast(`Application transmitted to ${companyName}!`);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('customModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toastBanner');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3200);
+        }
+
+        // Initialize Wireframe on Window Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderJobList();
+        });
+    </script>
+</body>
+</html>
